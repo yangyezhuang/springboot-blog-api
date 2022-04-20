@@ -10,6 +10,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author: Yang Yezhuang
+ * @date: 2022/3/17 15:16
+ */
 @Service
 public class ArticleService {
 
@@ -42,9 +46,21 @@ public class ArticleService {
         return articleMapper.findByYear();
     }
 
+    /**
+     * 获取用户发布的文章
+     *
+     * @param uid
+     * @return
+     */
+    public List<Article> listUserArticles(int uid) {
+        return articleMapper.listUserArticles(uid);
+    }
+
+
     // 添加文章
     public int insert(Article article) {
         long id = System.currentTimeMillis() / 1000; // 生成时间戳
+        String author = article.getAuthor();
         String title = article.getTitle();
         String content = article.getContent();
         String tag = article.getTag();
@@ -58,7 +74,7 @@ public class ArticleService {
         int month = cal.get(Calendar.MONTH) + 1;
         int year = cal.get(Calendar.YEAR);
 
-        return articleMapper.insert(id, title, content, tag, date, year, month);
+        return articleMapper.insert(id, author, title, content, tag, date, year, month);
     }
 
     // 修改文章

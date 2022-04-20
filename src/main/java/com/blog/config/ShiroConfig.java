@@ -1,4 +1,4 @@
-package com.blog.Config;
+package com.blog.config;
 
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;

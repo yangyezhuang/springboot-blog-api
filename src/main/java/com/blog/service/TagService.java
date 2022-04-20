@@ -8,9 +8,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @Description: TODO
- * @Date: 2022/3/17 13:27
- * @Author: Yang Yezhuang
+ * @author: Yang Yezhuang
+ * @date: 2022/3/17 15:16
  */
 @Service
 public class TagService {
@@ -18,16 +17,33 @@ public class TagService {
     @Autowired
     private TagMapper tagMapper;
 
+    /**
+     * 获取标签
+     *
+     * @return
+     */
+    public List<Tag> getTag() {
+        return tagMapper.selectTag();
+    }
 
+    /**
+     * 添加标签
+     *
+     * @param tag
+     * @return
+     */
     public int addTag(String tag) {
         return tagMapper.insertTag(tag);
     }
 
+    /**
+     * 删除标签
+     *
+     * @param tag
+     * @return
+     */
     public int delTag(String tag) {
         return tagMapper.deleteTag(tag);
     }
 
-    public List<Tag> getTag() {
-        return tagMapper.selectTag();
-    }
 }

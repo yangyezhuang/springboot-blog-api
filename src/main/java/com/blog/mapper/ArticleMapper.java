@@ -15,8 +15,8 @@ public interface ArticleMapper {
     @Select("select * from article_tbl;")
     List<Article> findAll();
 
-    //查看文章详情
-    @Select("select title,date,content,tag from article_tbl where id=#{id};")
+    // 查看文章详情
+    @Select("select author,title,date,content,tag from article_tbl where id=#{id};")
     Article findById(int id);
 
     // 搜索相关文章
@@ -27,16 +27,14 @@ public interface ArticleMapper {
     @Select("select * from article_tbl where tag=#{tag};")
     List<Article> findByTag(String tag);
 
-
-
     // 以时间进行归档
     @Select("select date,title,tag,year from article_tbl group by year;")
     List<Article> findByYear();
 
     // 添加文章
-    @Insert("insert into article_tbl (id,title,content,tag,date,year,month)" +
-            "values(#{id},#{title},#{content},#{tag},#{date},#{year},#{month});")
-    int insert(long id, String title, String content, String tag, String date, int year, int month);
+    @Insert("insert into article_tbl (id,author,title,content,tag,date,year,month)" +
+            "values(#{id},#{author},#{title},#{content},#{tag},#{date},#{year},#{month});")
+    int insert(long id, String author, String title, String content, String tag, String date, int year, int month);
 
     // 修改文章
     @Insert("UPDATE article_tbl SET title=#{title},content=#{content},tag=#{tag}," +
@@ -46,5 +44,10 @@ public interface ArticleMapper {
     // 删除文章
     @Delete("DELETE FROM article_tbl WHERE id=#{id};")
     int delArticle(int id);
+
+    // 获取用户发布的文章
+    @Select("select b.* from user_article_tbl as a,article_tbl as b where a.article_id=b.id and a.uid=#{uid};")
+    List<Article> listUserArticles(long uid);
+
 
 }

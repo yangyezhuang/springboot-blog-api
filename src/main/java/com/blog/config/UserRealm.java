@@ -1,4 +1,4 @@
-package com.blog.Config;
+package com.blog.config;
 
 import com.blog.model.User;
 import com.blog.service.UserService;

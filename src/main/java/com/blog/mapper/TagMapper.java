@@ -8,11 +8,7 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-/**
- * @Description: TODO
- * @Date: 2022/3/17 13:23
- * @Author: Yang Yezhuang
- */
+
 @Mapper
 public interface TagMapper {
 

@@ -1,48 +1,58 @@
 package com.blog.Util;
 
+/**
+ * @author: Yang Yezhuang
+ * @date: 2022/3/13
+ */
 public enum ResultCode {
-    /* 成功状态码 */
+    //
     SUCCESS(1, "成功"),
-    /* 失败状态码 */
-    FAILURE(0, "失败");
+    //
+    FAILURE(0, "失败"),
+    //
+    SERVER_BUSY(503, "服务器正忙，请稍后再试!");
 
-    private Integer code;
+    // @Getter
+    private int code;
+    // @Getter
     private String message;
 
-    ResultCode(Integer code, String message) {
+    ResultCode(int code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public Integer code() {
+
+    public int getCode() {
         return this.code;
     }
 
-    public String message() {
+    public String getMessage() {
         return this.message;
     }
 
-    public static String getMessage(String name) {
-        for (ResultCode item : ResultCode.values()) {
-            if (item.name().equals(name)) {
-                return item.message;
-            }
-        }
-        return name;
-    }
 
-    public static Integer getCode(String name) {
-        for (ResultCode item : ResultCode.values()) {
-            if (item.name().equals(name)) {
-                return item.code;
-            }
-        }
-        return null;
-    }
+    //public static String getMessage(String name) {
+    //    for (ResultCode item : ResultCode.values()) {
+    //        if (item.name().equals(name)) {
+    //            return item.message;
+    //        }
+    //    }
+    //    return name;
+    //}
+    //
+    //public static Integer getCode(String name) {
+    //    for (ResultCode item : ResultCode.values()) {
+    //        if (item.name().equals(name)) {
+    //            return item.code;
+    //        }
+    //    }
+    //    return null;
+    //}
 
-    @Override
-    public String toString() {
-        return this.name();
-    }
+    //@Override
+    //public String toString() {
+    //    return this.name();
+    //}
 
 }

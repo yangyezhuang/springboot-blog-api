@@ -7,10 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan("com.blog")
-public class SpringbootBlogApplication {
+public class BlogApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringbootBlogApplication.class, args);
+        SpringApplication.run(BlogApplication.class, args);
     }
 
 }

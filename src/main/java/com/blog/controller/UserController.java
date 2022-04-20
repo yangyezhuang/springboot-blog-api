@@ -12,22 +12,28 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
- * @Description: TODO
- * @Date: 2022/3/17 15:16
- * @Author: Yang Yezhuang
+ * @author: Yang Yezhuang
+ * @date: 2022/3/17 15:16
  */
 @Slf4j
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     UserService userService;
 
+    /**
+     * 用户登录
+     *
+     * @param user
+     * @return
+     */
     @PostMapping("/login")
     public Result login(@RequestBody User user) {
         String username = user.getUsername();
@@ -49,8 +55,8 @@ public class UserController {
             JSONObject json = new JSONObject();
             json.put("id", user.getId());
             json.put("username", user.getUsername());
-            //json.put("role", role);
-            //json.put("token", uToken);
+            // json.put("role", role);
+            // json.put("token", uToken);
 
             log.info("json" + json);
 
@@ -65,4 +71,70 @@ public class UserController {
             return Result.failure(ResultCode.FAILURE, "密码错误");
         }
     }
+
+    /**
+     * 用户注册
+     *
+     * @param user
+     * @return
+     */
+    @PostMapping("/register")
+    public int register(@RequestBody User user) {
+        return userService.insertUser(user);
+    }
+
+    /**
+     * 获取全部用户
+     *
+     * @return
+     */
+    @GetMapping("/list")
+    public List<User> userList() {
+        return userService.listUsers();
+    }
+
+    /**
+     * 管理员身份添加用户
+     *
+     * @param user
+     * @return
+     */
+    @PostMapping("/add")
+    public int insertUser(@RequestBody User user) {
+        return userService.insertUser(user);
+    }
+
+    /**
+     * 删除用户
+     *
+     * @param uid
+     * @return
+     */
+    @DeleteMapping("/del/{uid}")
+    public int deleteUser(@PathVariable("uid") long uid) {
+        return userService.deleteUser(uid);
+    }
+
+    /**
+     * 获取用户信息
+     *
+     * @param uid
+     * @return
+     */
+    @GetMapping("/info/{uid}")
+    public User getUserInfo(@PathVariable("uid") long uid) {
+        return userService.getUserInfo(uid);
+    }
+
+    /**
+     * 更新用户信息
+     *
+     * @param user
+     * @return
+     */
+    @PutMapping("/update")
+    public int updateUserInfo(@RequestBody User user) {
+        return userService.updateUserInfo(user);
+    }
+
 }
